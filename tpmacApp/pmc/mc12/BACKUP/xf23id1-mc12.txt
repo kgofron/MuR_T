@@ -1,0 +1,12 @@
+
+//m1(delta), m2(theta), m3(gamma), m4(muR), m5(muT), m6(X),m7(Y),m8(Z)
+m12shaftEnd20160122
+1. Delta, shaft encoder
+2. Theta, shaft encoder
+3. Gamma, no encoder (to be installed)
+4. MuR, no encoder
+5. MuT, no encoder
+6. X, stage encoder
+7. Y, stage encoder
+8. Z, stage encoder
+

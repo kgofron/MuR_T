@@ -1,0 +1,416 @@
+; Homing PLC for Axis 1 (PLC 8)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P800 = 0
+
+; Homing Status P Variable
+P801 = 0
+
+DEL GAT
+OPEN PLC8 CLEAR
+P801 = 1
+
+;---- Configuring State ----
+P800=1
+  
+if (P801=1)
+
+	;---- Homing State ----
+	if (P801=1)
+		P800=4
+		; Execute the move commands
+		cmd "#1hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P801=1)
+	and (M145=0)
+		P801=6
+	endif
+endif
+
+;---- Done ----
+if (P801 = 1)
+	;If we've got this far without failing, set status and state done
+	P801=0
+	P800=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M142=0)
+	cmd "#1J/"
+endif
+
+DISABLE PLC8
+CLOSE
+
+; Homing PLC for Axis 2 (PLC 9)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P900 = 0
+
+; Homing Status P Variable
+P901 = 0
+
+DEL GAT
+OPEN PLC9 CLEAR
+P901 = 1
+
+;---- Configuring State ----
+P900=1
+  
+if (P901=1)
+
+	;---- Homing State ----
+	if (P901=1)
+		P900=4
+		; Execute the move commands
+		cmd "#2hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P901=1)
+	and (M245=0)
+		P901=6
+	endif
+endif
+
+;---- Done ----
+if (P901 = 1)
+	;If we've got this far without failing, set status and state done
+	P901=0
+	P900=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M242=0)
+	cmd "#2J/"
+endif
+
+DISABLE PLC9
+CLOSE
+
+; Homing PLC for Axis 3 (PLC 10)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1000 = 0
+
+; Homing Status P Variable
+P1001 = 0
+
+DEL GAT
+OPEN PLC10 CLEAR
+P1001 = 1
+
+;---- Configuring State ----
+P1000=1
+  
+if (P1001=1)
+
+	;---- Homing State ----
+	if (P1001=1)
+		P1000=4
+		; Execute the move commands
+		cmd "#3hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1001=1)
+	and (M345=0)
+		P1001=6
+	endif
+endif
+
+;---- Done ----
+if (P1001 = 1)
+	;If we've got this far without failing, set status and state done
+	P1001=0
+	P1000=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M342=0)
+	cmd "#3J/"
+endif
+
+DISABLE PLC10
+CLOSE
+
+
+; Homing PLC for Axis 4 (PLC 11)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1100 = 0
+
+; Homing Status P Variable
+P1101 = 0
+
+DEL GAT
+OPEN PLC11 CLEAR
+P1101 = 1
+
+;---- Configuring State ----
+P1100=1
+  
+if (P1101=1)
+
+	;---- Homing State ----
+	if (P1101=1)
+		P1100=4
+		; Execute the move commands
+		cmd "#4hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1101=1)
+	and (M445=0)
+		P1101=6
+	endif
+endif
+
+;---- Done ----
+if (P1101 = 1)
+	;If we've got this far without failing, set status and state done
+	P1101=0
+	P1100=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M442=0)
+	cmd "#4J/"
+endif
+
+DISABLE PLC11
+CLOSE
+
+; Homing PLC for Axis 5 (PLC 12)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1200 = 0
+
+; Homing Status P Variable
+P1201 = 0
+
+DEL GAT
+OPEN PLC12 CLEAR
+P1201 = 1
+
+;---- Configuring State ----
+P1200=1
+  
+if (P1201=1)
+
+	;---- Homing State ----
+	if (P1201=1)
+		P1200=4
+		; Execute the move commands
+		cmd "#5hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1201=1)
+	and (M545=0)
+		P1201=6
+	endif
+endif
+
+;---- Done ----
+if (P1201 = 1)
+	;If we've got this far without failing, set status and state done
+	P1201=0
+	P1200=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M542=0)
+	cmd "#5J/"
+endif
+
+DISABLE PLC12
+CLOSE
+
+
+; Homing PLC for Axis 6 (PLC 13)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1300 = 0
+
+; Homing Status P Variable
+P1301 = 0
+
+DEL GAT
+OPEN PLC13 CLEAR
+P1301 = 1
+
+;---- Configuring State ----
+P1300=1
+  
+if (P1301=1)
+
+	;---- Homing State ----
+	if (P1301=1)
+		P1300=4
+		; Execute the move commands
+		cmd "#6hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1301=1)
+	and (M645=0)
+		P1301=6
+	endif
+endif
+
+;---- Done ----
+if (P1301 = 1)
+	;If we've got this far without failing, set status and state done
+	P1301=0
+	P1300=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M642=0)
+	cmd "#6J/"
+endif
+
+DISABLE PLC13
+CLOSE
+
+
+; Homing PLC for Axis 7 (PLC 14)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1400 = 0
+
+; Homing Status P Variable
+P1401 = 0
+
+DEL GAT
+OPEN PLC14 CLEAR
+P1401 = 1
+
+;---- Configuring State ----
+P1400=1
+  
+if (P1401=1)
+
+	;---- Homing State ----
+	if (P1401=1)
+		P1400=4
+		; Execute the move commands
+		cmd "#7hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1401=1)
+	and (M745=0)
+		P1401=6
+	endif
+endif
+
+;---- Done ----
+if (P1401 = 1)
+	;If we've got this far without failing, set status and state done
+	P1401=0
+	P1400=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M742=0)
+	cmd "#7J/"
+endif
+
+DISABLE PLC14
+CLOSE
+
+
+; Homing PLC for Axis 8 (PLC 15)
+; 
+; This program will home an axis to the current position. It issues a HMZ
+; command.
+
+; Initial configuration of state variables.
+; Homing State P Variable
+P1500 = 0
+
+; Homing Status P Variable
+P1501 = 0
+
+DEL GAT
+OPEN PLC15 CLEAR
+P1501 = 1
+
+;---- Configuring State ----
+P1500=1
+  
+if (P1501=1)
+
+	;---- Homing State ----
+	if (P1501=1)
+		P1500=4
+		; Execute the move commands
+		cmd "#8hmz"
+	endif
+
+	;---- Check if all motors have homed ----
+	if (P1501=1)
+	and (M845=0)
+		P1501=6
+	endif
+endif
+
+;---- Done ----
+if (P1501 = 1)
+	;If we've got this far without failing, set status and state done
+	P1501=0
+	P1500=7
+endif
+
+;---- Tidy Up ----
+;Stop all motors if they don't have a following error
+if (M842=0)
+	cmd "#8J/"
+endif
+
+DISABLE PLC15
+CLOSE
+
+
+
+
+

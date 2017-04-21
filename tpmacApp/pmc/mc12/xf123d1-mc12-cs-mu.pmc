@@ -1,0 +1,133 @@
+;####################################################
+; Generic program for moving any co-ordinate system
+;####################################################
+; EPICS parameters 
+; BaseSpeed single axis 
+; MuR.VBAS=0.1 deg/s)
+; MuT.VBAS=0.5 mm/s
+;
+; Base speed coordinated motion:
+; MuTc.VBAS=1.0 mm/s
+; MuRc.VBAS=0.1 deg/s
+;#######################
+
+;This program defines the program needed to do a move using the motor record
+;on a CS axis
+;to do a move we need to do &{CS}R
+;to stop a move we need to do &{CS}A
+;demand values are in &{CS}Q71..79
+;The following are set by the motor record:
+;Isx87 = Acceleration
+;Isx89 = Feedrate
+; I15=0 to report in degrees
+I15=0
+
+; Set some defaults for all CS axes
+i5213,15,100=10 ; segmentation time (needed for lookahead)
+i5220,15,100=50 ; lookahead length (needed to limit max velocity to max in CS)
+i5250,15,100=1  ; Enable kinematics
+i5750,10,100=0  ; Disable kinematics
+; I68=4 ; 4 is optimal for 5 coordinates, 'I68=4 SAVE $$$'
+
+; Set encoder/motor resolution in [mm, deg] / MuR [deg], MuT [mm]. 
+#define SCALE_MUR 0.0000078125
+#define SCALE_MUT 0.0000396875
+
+; Set distance between center of MuT sliding window and center of rotation [mm]
+#define A_MUT	685	; 685 mm from center of rotation to X-ray hole
+
+; Define conversion from degree to Radian
+#define DEG2RAD = 0.0174533
+#define RAD2DEG = 57.2958
+
+OPEN PROG 10
+	CLEAR
+	LINEAR
+	ABS
+	FRAX(X,Y)
+	X(Q77)Y(Q78)
+	DWELL0
+CLOSE
+
+;################################################
+; Define motion for MuR Tardis vertical yaw 
+; Defined axes:
+;   X (addr 6) = yaw
+;   Y (addr 7) = center
+; 
+; 
+;################################################
+
+; Preset some calibration parameters (Resolution, Offset)
+P4804 = SCALE_MUR
+P4904 = 0
+P4805 = SCALE_MUT
+P4905 = 0
+
+&2
+#4->I ; MuR
+#5->I ; MuT
+
+; Define motor parameters
+#define T_MUR_MTR_MOVE P4704
+#define T_MUR_MTR_MRES P4804
+#define T_MUR_MTR_OFF  P4904
+#define T_MUT_MTR_MOVE P4705
+#define T_MUT_MTR_MRES P4805
+#define T_MUT_MTR_OFF  P4905
+; Calculate Mu position from motor positions
+#define T_MUR_MTR_POS (T_MUR_MTR_MRES*P4+T_MUR_MTR_OFF)
+#define T_MUT_MTR_POS (T_MUT_MTR_MRES*P5+T_MUT_MTR_OFF)
+
+#define T_YAW Q7
+#define T_TR Q8
+
+OPEN FORWARD CLEAR
+; Check home complete bits for each motor
+IF (M445=1 AND M545=1)
+	T_YAW = T_MUR_MTR_POS
+	T_TR = T_MUT_MTR_POS + A_MUT*TAN(T_MUR_MTR_POS)
+ELSE
+	; Set run-time error bit, dwell time
+	M5282=1
+ENDIF
+CLOSE
+
+#define T_I_MUR_MTR_POS Q228
+#define T_I_MUT_MTR_POS Q229
+
+&2   
+OPEN INVERSE CLEAR
+; Calculate in EGU
+T_I_MUR_MTR_POS = T_YAW
+T_I_MUT_MTR_POS = T_TR - A_MUT*TAN(T_YAW)
+
+; Calculate in counts
+P4 = (T_I_MUR_MTR_POS - T_MUR_MTR_OFF)/T_MUR_MTR_MRES
+P5 = (T_I_MUT_MTR_POS - T_MUT_MTR_OFF)/T_MUT_MTR_MRES
+CLOSE
+
+; A PLC(sx+15) needs to be made to do position reporting
+; Readbacks should be in &{axisnum}Q81..89
+; As forward kinematic, but with Px = mx62/(Ix08*32)
+#define T_REAL_MUR_MTR_POS (T_MUR_MTR_MRES*M462/(I408*32)+T_MUR_MTR_OFF)
+#define T_REAL_MUT_MTR_POS (T_MUT_MTR_MRES*M562/(I508*32)+T_MUT_MTR_OFF)
+
+#define T_RB_YAW Q87
+#define T_RB_TR Q88
+
+OPEN PLC16
+	CLEAR
+	ADDRESS&2
+
+	T_RB_YAW = T_REAL_MUR_MTR_POS
+	T_RB_TR = T_REAL_MUT_MTR_POS + A_MUT*TAN(T_REAL_MUR_MTR_POS)
+
+	; If motor record did the last move, set demands = readbacks?
+	if (T_MUR_MTR_MOVE = 1) or (T_MUT_MTR_MOVE = 1)
+		T_MUR_MTR_MOVE = 0
+		T_MUT_MTR_MOVE = 0
+		Q77 = T_RB_YAW
+		Q78 = T_RB_TR
+	endif
+CLOSE

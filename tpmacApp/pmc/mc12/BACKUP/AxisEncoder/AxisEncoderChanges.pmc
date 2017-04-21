@@ -1,0 +1,19 @@
+// Tardis axis encoders
+// Point to axis encoder
+I103=$3504
+I203=$3505
+I104=$3504
+I204=$3505
+
+;Motor tuning
+I130=12000 I131=0 I132=2000 I133..139=0
+I230=12000 I231=0 I232=2000 I233..239=0
+
+; Axis encoder
+I7040=3 I7110=3
+
+; Use Commutation Position Address
+;I183=$350B I273=$350E
+
+;I122,2,100=2
+;I123,2,100=-2

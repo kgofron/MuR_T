@@ -1,0 +1,24 @@
+// K. Gofron, NSLS2 geoBrick Configuration
+// Version 3, 2014-8-16: Explicitly disable homing PLCs
+// Beamline: CSX1
+// Module: Diffractometer, mc12
+// M1: Delta
+// M2: Theta
+// M3: Gamma
+// M4: MuR
+// M5: MuT
+// M6: X
+// M7: Y
+// M8: Z
+
+//#include "GB_kaz_M.pmc" is pulled by GB_kaz_I21.pmc
+
+//#include "GB_kaz_I20.pmc"
+#include "GB_kaz_I21.pmc"
+#include "pmc\GB_kaz_plc7.pmc"
+#include "xf23id1-mc12-diff.pmc"
+#include "pmc\xf23id1-mc12-plc01.pmc"
+#include "pmc\xf23id1-mc12-plc05-cpu.pmc"
+#include "pmc\xf23id1-mc12-homing.pmc"
+//#include "xf10ida-mc02-brake.pmc"
+

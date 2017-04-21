@@ -1,0 +1,17 @@
+;Log created by PMAC Win32 Driver from file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.pmc
+;
+000001:            Processing Macro File: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.pmc
+000002:            $60450
+000003:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\BRICK_M_variables.pmc
+000004:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_plc167.pmc
+000005:            Total Lines: 4296
+000006:            Compiling for PLCC: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.PMA = C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.56K
+000007:            PLCC Compiling PMAC file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.PMA
+000008:            Success in Compiling to output file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.56K
+000009:            No PLCC(s) were compiled
+000010:            Downloading file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.56K
+000011:            Downloaded 3490 lines in 1973 msecs
+000012:            Writing MAP file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.MAP
+000013:            Writing macro dictionary table: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.TBL
+000014:            Total Warnings: 0
+000015:            Total Errors: 0

@@ -1,0 +1,24 @@
+;Log created by PMAC Win32 Driver from file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.pmc
+;
+000001:            Processing Macro File: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.pmc
+000002:            $60450
+000003:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_I21.pmc
+000004:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\BRICK_M_variables.pmc
+000005:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\GB_kaz_plc167.pmc
+000006:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\pmc\GB_kaz_plc7.pmc
+000007:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12-diff.pmc
+000008:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\pmc\xf23id1-mc12-plc01.pmc
+000009:            Warning: 1 Line: 21 : Definition: timer, defined with different value.
+000010:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\pmc\xf23id1-mc12-plc05-cpu.pmc
+000011:            Including file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\pmc\xf23id1-mc12-homing.pmc
+000012:            Total Lines: 5340
+000013:            Compiling for PLCC: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.PMA = C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.56K
+000014:            PLCC Compiling PMAC file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.PMA
+000015:            Success in Compiling to output file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.56K
+000016:            No PLCC(s) were compiled
+000017:            Downloading file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.56K
+000018:            Downloaded 4004 lines in 2215 msecs
+000019:            Writing MAP file: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.MAP
+000020:            Writing macro dictionary table: C:\Users\kgofron\Documents\E6510w\ControlsGroup\CSX\CSX1\NSLS2config\mc12\xf23id1-mc12.TBL
+000021:            Total Warnings: 1
+000022:            Total Errors: 0

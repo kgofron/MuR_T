@@ -1,0 +1,339 @@
+// K. Gofron, NSLS2 geoBrick Configuration I65=1537, 2013-3-10
+// Version 2, 2014-1-27: Explicitly disable homing PLCs
+// The following are clock setting I-variables............................................I
+CLOSE
+DELETE GATHER
+DELETE TRACE
+
+// Clock Setup Parameters
+// I7000..7999 control the hardware setup of the Servo IC.
+// Servo IC 1 MaxPhase/PWM Frequency Control
+// Servo IC even 0,2,4,6,8 use channel numbers 1..4
+// Servo IC odd 1,3,5,7,9 use channel numbers 5..8
+
+// Servo IC 0 MaxPhase = 117,964.8 [kHz]/(2*I7mn00+3)=40[kHz], PWM=117,964.8[kHz]/(4*I7mn00+6)=20kHz
+I7000=1473
+// Servo IC 0 PhaseClock=MaxPhase[kHz]/(I7001+1)=10 [kHz]
+I7001=3
+// Servo IC 0 Servo Clock Frequency Control =PhaseClock/(I7mn2+1)=5 [kHz]
+I7002=1
+// Servo IC 0 Hardware Clock Control, SCLK=2 (9.8304 MHz), PFM_CLK=2 (9.8304 MHz), DAC_CLK=3 (4.9152 MHz), ADC_CLK=3 (4.9152 MHz)
+// I7003=2+2*8+3*64+3*512=1746
+// I7m03=(Encoder SCLK Divider + 8*PFM+64*DAC+512*ADC), ADC_CLK=39.3216MHz/2^ADC
+I7003=1746
+// Servo IC 0 PWM Deadtime / PFM Pulse Width Control, 3*0.135=0.405 us
+I7004=3
+
+// Servo IC 1
+I7100=1473
+I7101=3
+I7102=1
+I7103=1746
+I7104=3
+
+;I3=2
+;I4=0
+;I6=1
+;I9=2
+; Foreground PLCs off; background PLCs on
+I5=2
+
+// Servo Interrupt Time I10=8,388,608*ServoTime(m sec)=8,388,608/ServoFrenquency[kHz]; 
+// ServoTime~200us
+// I10=640/9(2*I7000+3)(I7001+1)(I7002+1)=1677653
+I10=1677653
+
+;The following are M-variable definitions.................................M
+;
+;####################################################
+; Now included from Common File
+;####################################################
+
+//include "GB_kaz_M.pmc"
+#include "BRICK_M_variables.pmc"
+; Include PLC 1, 6, 7
+#include "GB_kaz_plc167.pmc"
+
+//The following are I-variables............................................I
+//
+// DPRAM Background Data Reporting Period in servo cycles
+// Since I49=0, DPRAM background data reporting function is disabled 
+;I50=20 
+
+// User Configuration Variable, verify that configuration was loaded, configuration serial number
+I65=1537
+
+// Activate motors, 
+I100,8,100=1
+// Perform commutation with PMAC encoder register feedback, Commutation and current loop I102=$78002
+I101,8,100=1
+
+// Position Loop Feedback Address stepper with encoder, with table setup I8000-I8191
+;I103=$3501
+;I203=$3502
+;I303=$3503
+;I403=$3504
+;I503=$3505
+;I603=$3506
+;I703=$3507
+;I803=$3508
+
+// Position Loop Feedback Address stepper w/o encoder
+I103=$350B
+I203=$350E
+I303=$3511
+I403=$3514
+I503=$3517
+I603=$351A
+I703=$351D
+I803=$3520
+
+// Velocity Loop Feedback Address
+I104=$350B
+I204=$350E
+I304=$3511
+I404=$3514
+I504=$3517
+I604=$351A
+I704=$351D
+I804=$3520
+
+// Position Scale Factor reduced from 96 posibly not to saturate at high gains or count rates, Ixx07/Ixx08=gear
+I108,8,100=32
+; Velocity-Loop Scale Factor
+I109,8,100=32
+; Abort/Limit Deceleration Rate, ct/ms^2
+I115,8,100=1
+; Maximum Program Velocity, ct/ms
+I116,8,100=512
+; Maximum Program Acceleration, ct/ms^2
+I117,8,100=1
+; Maximum Jog/Home Acceleration, ct/ms^2
+I119,8,100=0.25
+; Jog/Home Acceleration Time, ms
+I120,8,100=100
+; Jog/Home S-Curve Time, ms
+I121,8,100=0
+; Jog Speed, ct/ms
+I122,8,100=20
+; Home Speed and Direction, ct/ms
+I123,8,100=10
+
+; Flag Mode Control $800401 - enabled limits
+; 1000 0000 0000 0100 0000 0001
+; 0001 , Bit0=1 : PMAC2 flag register;
+; 0100, Bit10=1:  ?
+; 0100, Bit17=1: Ignor limits;
+; 1000, Bit23=1: 
+; $840401 - disabled limits
+I124,8,100=$800401
+
+// Motor tuning, Ix30-proportional, Ix31-derivative, Ix32-VFF,Ix33-Integral, Ix34: I-Mode, Ix35: AFF
+; Ix34=0, Integration Mode: 0=position error integration performed all the time
+I130,8,100=4096
+I131,8,100=0
+I132,8,100=16384
+I133,8,100=10000
+I134,8,100=0
+I135,8,100=4096
+
+// CURRENT LOOP CONTROL MIGHT BE PROBLEMATIC, Ix62 or Ix76 should be used
+; Ixx61: Current-Loop Integral Gain
+; Ixx62: Current-Loop Forward-Path Proportional Gain
+; Ixx66: PWM Scale Factor
+; Ixx69: Output Command Limit (0.39V), limit of quadrature torque producing current
+; Ixx71: Comutation Cycles, 1/32 of a count, 128=Full step
+; Ixx72: Commutation Phase Angle, 512=90deg
+; Ixx76: Current-Loop Back-Path Proportional Gain
+; Ixx84: Current-Loop Feedback Mask Word
+I161,8,100=0.035
+I162,8,100=0.35
+I166,8,100=1620
+I169,8,100=1280
+I171,8,100=4096
+I172,8,100=512
+I176,8,100=0.75
+
+// Magnetization Stator Current, check Ix69
+I177,8,100=500
+
+; Ix29 Output/First Phase Offset
+; Ix79 Second Phase Offset
+
+; Power-On Phase Position Address, Ix81=0 for incremental encoder
+I181=$350B
+I281=$350E
+I381=$3511
+I481=$3514
+I581=$3517
+I681=$351A
+I781=$351D
+I881=$3520
+
+; Current-Loop Feedback Address
+I182=$78006
+I282=$7800E
+I382=$78016
+I482=$7801E
+I582=$78106
+I682=$7810E
+I782=$78116
+I882=$7811E
+
+; Commutation Position Address, I183=$78001
+I183=$350B
+I283=$350E
+I383=$3511
+I483=$3514
+I583=$3517
+I683=$351A
+I783=$351D
+I883=$3520
+
+; Current-Loop Feedback Mask Word, 14-bit ADC $FFFC000
+I184,8,100=$FFFC00
+
+; Position Capture & Trigger Mode, Homing. Position Capture in software (1)
+I197,8,100=1
+
+; _________________________________
+; Test motors. They display encoder position when moving without encoder
+;I900,8,100=1
+
+;I903=$3501
+;I1003=$3502
+;I1103=$3503
+;I1203=$3504
+;I1303=$3505 
+;I1403=$3506
+;I1503=$3507
+;I1603=$3508
+
+;I908,8,100=32
+;I909,8,100=32
+; ___________________________________
+
+; Data Gathering Source 1-48 Address
+; $4: X-register only (24 bits)
+; $8: X/Y double register (48 bits), program interprets as integer
+I5001=$8000A5
+I5002=$80008B
+I5003=$4000BF
+I5004=$4000B9
+
+; Data Gathering period in Servo cycles
+I5049=10
+
+; Data Gathering Selection Mask 1, , $F=I5001,I5002,I5003,I5004
+I5050=$F
+; _______________________________
+; I5100-I6600 control setup of 16 coordinate systems
+; CS1: I5100-5199 {for example}
+; s=5 for CS 1-9
+; s=6 for CS 10-16
+; x=1..9 for CS 1-9, x=1..6 (minus 10) for CS 10-16
+
+;CS 1-16 User Countdown Timer 1 {servo cycles} 
+; I5111: User Countdown Timer 1 for cooridnate x=1, Isx11
+;I5111=-857791
+;I5211=-858248
+;I5311=-858291
+;I5511=-858377
+;I5611=-858418
+;I5711=-858461
+;I5811=-858505
+;I5911=-858546
+;I6011=-858589
+;I6111=-858631
+;I6211=-859089
+;I6311=-859131
+;I6411=-859174
+;I6511=-859217
+;I6511=-859217
+;I6611=-859259
+
+;CS 1-16 User Countdown Timer 2 {servo cycles}
+;I5112=-857792
+;I5212=-858249
+;I5312=-858292
+;I5512=-858378
+;I5612=-858419
+;I5712=-858462
+;I5812=-858506
+;I5912=-858547
+;I6012=-858590
+;I6112=-858632
+;I6212=-859090
+;I6312=-859132
+;I6412=-859175
+;I6512=-859218
+;I6612=-859260
+
+; Coordinate System x Segmentation Time
+;I5113=0
+;I5213,15,100=10
+
+; Cooridnate x Lookahead Length [Isx13 segmentation period]
+;I5120=0
+;I5220,15,100=50
+
+; CS x Kinematic Calculations Enable
+;I5150=0
+;I5250,15,100=1
+
+; CS1 coordinate 1 Default Program acceleration time [ms]
+;I5187=500
+;I5487=500
+; CS1 coordinate 1 S-Curve time [ms]
+;I5188=0
+; CS 1 Program Feedrate/Move Time [ms]
+;I5189=800
+;I5489=10000
+
+; Isx91 CS x Default Working Program Number
+; ----------------------
+
+; Conversion Table Setup Lines
+I8000=$78000
+I8001=$78008
+I8002=$78010
+I8003=$78018
+I8004=$78100
+I8005=$78108
+I8006=$78110
+I8007=$78118
+I8008=$6800BF
+I8009=$10020
+I8010=$EC0009
+I8011=$68013F
+I8012=$10020
+I8013=$EC000C
+I8014=$6801BF
+I8015=$10020
+I8016=$EC000F
+I8017=$68023F
+I8018=$10020
+I8019=$EC0012
+I8020=$6802BF
+I8021=$10020
+I8022=$EC0015
+I8023=$68033F
+I8024=$10020
+I8025=$EC0018
+I8026=$6803BF
+I8027=$10020
+I8028=$EC001B
+I8029=$68043F
+I8030=$10020
+I8031=$EC001E
+
+
+
+
+
+
+
+
+
+
+

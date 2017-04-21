@@ -1,0 +1,15 @@
+= IXS VDCM in hutch A
+
+== Axes ==
+[1] {Spec:1-Ax:2Th}	- Two Theta
+[2] {Spec:1-Ax:Y1} 	- Spectrometer Y1 - Sample Tower
+[3] {Spec:1-Ax:Y2}	- Spectrometer Y2 - Sample Tower
+[4] {Spec:1-Ax:Y3} 	- Spectrometer Y3 - Sample Tower
+[5] {Spec:1-Ax:Th}	- Theta - Sample Tower
+[6] {Env:1-Ax:Y1}	- Sample Y1 
+[7] {Env:1-Ax:Y2}	- Sample Y2
+[8] {Env:1-Ax:Y3}	- Sample Y3
+
+Offset set to ? degree
+Offset values = ?? (raw), ? degree as read from pmac.
+

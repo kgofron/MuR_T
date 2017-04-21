@@ -1,0 +1,7 @@
+file "PLC_brake.pmc" 
+{
+pattern
+{ PLC,  BRAKE,  MOTOR,  APPLY,  RELEASE }
+{ 16,   32,     1,      0,      1  }
+}
+

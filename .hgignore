@@ -1,0 +1,19 @@
+syntax: glob
+*.swp
+*.orig
+*.56K
+*.LOG
+*.MAP
+*.PMA
+*.TBL
+db/
+dbd/
+O.linux-x86_64/
+O.Common/
+envPaths
+bin/
+as/
+O.linux-x86_64-debug/
+
+syntax: regexp
+^pmc/

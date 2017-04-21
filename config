@@ -1,0 +1,4 @@
+NAME=mc3
+USER=softioc
+PORT=4011
+HOST=xf10idd-ioc1

@@ -1,0 +1,8 @@
+file "db/motor.db"
+{
+# ADDR ---> axis #
+pattern
+{ P,                M,                    MOTOR,  ADDR,   DESC,             DTYP,	MRES,		EGU,	PREC,  VBAS,	ACCL,	ALIAS }
+{ "XF:10IDD-OP", "{T:1-Ax:Thc}Mtr",      "CS2",  6,      "Thc",     	   asynMotor, 7.8125e-6,	    "deg", 	6,     0.01,		0.25,	""  }
+{ "XF:10IDD-OP", "{T:1-Ax:Xc}Mtr",     	 "CS2",  7,      "Window X",       asynMotor, 3.96875e-5,  	    "mm", 	6,     0.01,		0.25,	""  }
+}

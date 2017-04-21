@@ -1,0 +1,13 @@
+file "db/pmac_asyn_motor.db"
+{
+pattern
+{SYS,            DEV,                  MOTOR,  SPORT,  ADDR,  DESC,                 DTYP        PREC,  EGU}
+{"XF:10IDD-OP",  "{T:1-Ax:2Th}",    "M0",   "P0",   1,     "Arm TTH",            asynMotor,  6,     "deg"}
+{"XF:10IDD-OP",  "{T:1-Ax:Y1}",     "M0",   "P0",   2,     "Y1",                 asynMotor,  6,     "mm"}
+{"XF:10IDD-OP",  "{T:1-Ax:Y2}",     "M0",   "P0",   3,     "Y2",                 asynMotor,  6,     "mm"}
+{"XF:10IDD-OP",  "{T:1-Ax:Y3}",     "M0",   "P0",   4,     "Y3",                 asynMotor,  6,     "mm"}
+{"XF:10IDD-OP",  "{T:1-Ax:Th}",     "M0",   "P0",   5,     "Theta",              asynMotor,  6,     "deg"}
+{"XF:10IDD-OP",  "{T:1-Ax:Ys1}",      "M0",   "P0",   6,     "Y1 local(B) / (A)",  asynMotor,  6,     "mm"}
+{"XF:10IDD-OP",  "{T:1-Ax:Ys2}",      "M0",   "P0",   7,     "Y2 local(B) / (A)",  asynMotor,  6,     "mm"}
+{"XF:10IDD-OP",  "{T:1-Ax:Ys3}",      "M0",   "P0",   8,     "Y3 local(B) / (A)",  asynMotor,  6,     "mm"}
+}

@@ -1,0 +1,13 @@
+file "db/motor.db"
+{
+pattern
+{P,              M,                    MOTOR,  PORT,  ADDR,  DESC,                 DTYP,      MRES,        EGU,  PREC,  ALIAS }
+{"XF:10IDD-OP",  "{T:1-Ax:2Th}Mtr", "M0",   "P0",  1,     "Arm TTH",            asynMotor, 5.364418e-06, "deg", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y1}Mtr",  "M0",   "P0",  2,     "Y1",                 asynMotor, 1e-06,       "mm", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y2}Mtr",  "M0",   "P0",  3,     "Y2",                 asynMotor, 1e-06,       "mm", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y3}Mtr",  "M0",   "P0",  4,     "MuR",                asynMotor, 7.8125e-6,       "deg", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Th}Mtr",  "M0",   "P0",  5,     "MuT",              	asynMotor, 3.968753e-5,      "mm", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys1}Mtr",   "M0",   "P0",  6,     "Y1 local(B) / (A)",  asynMotor, 5e-05,       "mm", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys2}Mtr",   "M0",   "P0",  7,     "Y2 local(B) / (A)",  asynMotor, 5e-05,       "mm", 6,     ""    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys3}Mtr",   "M0",   "P0",  8,     "Y3 local(B) / (A)",  asynMotor, 5e-05,       "mm", 6,     ""    }
+}

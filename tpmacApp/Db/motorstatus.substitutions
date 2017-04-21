@@ -1,0 +1,27 @@
+file "db/motorstatus.db"
+{
+pattern
+{SYS,            DEV,                  PORT,  AXIS }
+{"XF:10IDD-OP",  "{T:1-Ax:2Th}",    "P0",  1    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y1}",     "P0",  2    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y2}",     "P0",  3    }
+{"XF:10IDD-OP",  "{T:1-Ax:Y3}",     "P0",  4    }
+{"XF:10IDD-OP",  "{T:1-Ax:Th}",     "P0",  5    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys1}",      "P0",  6    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys2}",      "P0",  7    }
+{"XF:10IDD-OP",  "{T:1-Ax:Ys3}",      "P0",  8    }
+}
+
+file "db/pmacStatusAxis.db"
+{
+pattern
+{SYS,             DEV,            PORT,  AXIS }
+{"XF:10IDD-CT",   "{MC:18-Ax:1}", "P0",  1    }
+{"XF:10IDD-CT",   "{MC:18-Ax:2}", "P0",  2    }
+{"XF:10IDD-CT",   "{MC:18-Ax:3}", "P0",  3    }
+{"XF:10IDD-CT",   "{MC:18-Ax:4}", "P0",  4    }
+{"XF:10IDD-CT",   "{MC:18-Ax:5}", "P0",  5    }
+{"XF:10IDD-CT",   "{MC:18-Ax:6}", "P0",  6    }
+{"XF:10IDD-CT",   "{MC:18-Ax:7}", "P0",  7    }
+{"XF:10IDD-CT",   "{MC:18-Ax:8}", "P0",  8    }
+}

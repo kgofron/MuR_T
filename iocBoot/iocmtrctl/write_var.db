@@ -1,0 +1,10 @@
+record(bo, "$(P)$(R)-cmd") {
+#    field(SCAN, "1 second")
+    field(SCAN, "Passive")
+    field(DESC, "$(R)")
+    field(DTYP, "stream")
+    field(OUT, "@pmac.proto setIntVar($(VAR)) $(PORT) $(ADDR)")
+#    field(FLNK, "$(P)$(R)-I")
+    # field(TPRO, 1)
+}
+
